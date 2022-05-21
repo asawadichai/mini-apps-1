@@ -7,12 +7,19 @@
   <body>
     <p><strong>CSV Report Generator</strong></p>
     <p>Description: Generates CSV reports from JSON data</p>
-    <form action="/" method="POST" class="form">
+    <!--<form action="/" method="POST" class="form">
       <label>Enter JSON:</label>
       <textarea id="data" name="data" rows="15" cols="30"></textarea>
       <input type="submit" value="submit">
       <label> CSV Report:</label>
       <textarea id="report" name="report" rows="15" cols="60"></textarea>
+    </form>-->
+    <form action="/" method="POST" enctype="multipart/form-data" class="form">
+      <!--<label> CSV Report:</label>
+      <textarea id="report" name="report" rows="15" cols="60"></textarea>-->
+      <p><label>Upload JSON:</label><input type="file" id="file" name="jsonfile" accept=".json">
+        <input type="button" value="upload" id="upload"></p>
+        <a href="/csvreport" download="csvreport.csv" id="download">Download CSV File</a>
     </form>
     <script src="app.js"></script>
   </body>
