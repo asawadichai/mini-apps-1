@@ -1,0 +1,22 @@
+{
+  "name": "challenge_3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/public/index.html",
+  "scripts": {
+    "react-babel": "babel client --out-dir public --presets @babel/preset-react --source-maps inline --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon server.js"
+  },
+  "author": "asawadichai",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/preset-react": "^7.17.12",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.8",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
