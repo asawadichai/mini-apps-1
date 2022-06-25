@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import Board from './components/board.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +14,7 @@ class App extends React.Component {
       5 : [null, null, null, null, null, null, null],
       currentPlayer: 'red',
       win: false,
+      turns: 0,
       tie: false
     }
     this.setPiece.bind(this);
@@ -78,6 +77,10 @@ class App extends React.Component {
     })
     this.setState({colHeight : newColHeight})
 
+    this.setState((state, props) => ({
+      turns: state.turns + 1
+    }))
+
     this.checkWinner();
   }
 
@@ -93,7 +96,9 @@ class App extends React.Component {
           if (this.state[row][col] === this.state[row][col+1] &&
             this.state[row][col+1] === this.state[row][col+2] &&
             this.state[row][col+2] === this.state[row][col+3]) {
-              this.setWinner(row, col);
+              if(!this.state.win){
+                this.setWinner(row, col);
+              }
             }
         }
       }
@@ -104,7 +109,9 @@ class App extends React.Component {
           if (this.state[row][col] === this.state[row+1][col] &&
             this.state[row+1][col] === this.state[row+2][col] &&
             this.state[row+2][col] === this.state[row+3][col]) {
-              this.setWinner(row, col);
+              if(!this.state.win){
+                this.setWinner(row, col);
+              }
             }
         }
       }
@@ -115,7 +122,9 @@ class App extends React.Component {
           if (this.state[row][col] === this.state[row+1][col+1] &&
             this.state[row+1][col+1] === this.state[row+2][col+2] &&
             this.state[row+2][col+2] === this.state[row+3][col+3]) {
-              this.setWinner(row, col);
+              if(!this.state.win){
+                this.setWinner(row, col);
+              }
             }
         }
       }
@@ -126,10 +135,16 @@ class App extends React.Component {
           if (this.state[row][col] === this.state[row-1][col+1] &&
             this.state[row-1][col+1] === this.state[row-2][col+2] &&
             this.state[row-2][col+2] === this.state[row-3][col+3]) {
-              this.setWinner(row, col);
+              if(!this.state.win){
+                this.setWinner(row, col);
+              }
             }
         }
       }
+    }
+    if(this.state.turns === 42 && !this.state.win) {
+      this.setState({tie: true})
+      document.getElementById("winner").append('tie!');
     }
   }
 
