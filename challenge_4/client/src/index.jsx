@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,135 @@ class App extends React.Component {
     this.setPiece.bind(this);
   }
 
+  testHorizontal () {
+    //test horizontal
+    this.setState({
+      5: ['red', 'red', 'red', 'red', 'yellow', 'yellow', 'yellow']
+    })
+    setTimeout(() => {
+      this.checkWinner();
+      if(this.state.win){
+        console.log('horizontal pass');
+        this.testVertical();
+      }}, "10");
+  }
+  testVertical () {
+    this.setState({colHeight: [5, 5, 5, 5, 5, 5, 5],
+      0 : [null, null, null, null, null, null, null],
+      1 : [null, null, null, null, null, null, null],
+      2 : [null, null, null, null, null, null, null],
+      3 : [null, null, null, null, null, null, null],
+      4 : [null, null, null, null, null, null, null],
+      5 : [null, null, null, null, null, null, null],
+      currentPlayer: 'red',
+      win: false,
+      turns: 0,
+      tie: false})
+      this.setState({ 0 : [null, null, null, null, null, null, null],
+        1 : [null, null, null, null, null, null, null],
+        2 : ['red', null, null, null, null, null, null],
+        3 : ['red', 'yellow', null, null, null, null, null],
+        4 : ['red', 'yellow', null, null, null, null, null],
+        5 : ['red', 'yellow', null, null, null, null, null]})
+      setTimeout(() => {
+        this.checkWinner();
+        if(this.state.win){
+          console.log('vertical pass');
+          this.testMajor();
+        }}, "10");
+  }
+  testMajor () {
+    this.setState({colHeight: [5, 5, 5, 5, 5, 5, 5],
+      0 : [null, null, null, null, null, null, null],
+      1 : [null, null, null, null, null, null, null],
+      2 : [null, null, null, null, null, null, null],
+      3 : [null, null, null, null, null, null, null],
+      4 : [null, null, null, null, null, null, null],
+      5 : [null, null, null, null, null, null, null],
+      currentPlayer: 'red',
+      win: false,
+      turns: 0,
+      tie: false})
+      this.setState({ 0 : [null, null, null, null, null, null, null],
+        1 : [null, null, null, null, null, null, null],
+        2 : [null, null, null, 'red', null, null, null],
+        3 : [null, null, 'red', 'yellow', null, null, null],
+        4 : [null, 'red', 'yellow', 'yellow', null, null, null],
+        5 : ['red', 'yellow', 'red', 'yellow', 'red', null, null]})
+      setTimeout(() => {
+        this.checkWinner();
+        if(this.state.win){
+          console.log('major pass');
+          this.testMinor();
+        }}, "10");
+  }
+  testMinor () {
+    this.setState({colHeight: [5, 5, 5, 5, 5, 5, 5],
+      0 : [null, null, null, null, null, null, null],
+      1 : [null, null, null, null, null, null, null],
+      2 : [null, null, null, null, null, null, null],
+      3 : [null, null, null, null, null, null, null],
+      4 : [null, null, null, null, null, null, null],
+      5 : [null, null, null, null, null, null, null],
+      currentPlayer: 'red',
+      win: false,
+      turns: 0,
+      tie: false})
+      this.setState({ 0 : [null, null, null, null, null, null, null],
+        1 : [null, null, null, null, null, null, null],
+        2 : ['red', 'yellow', null, null, null, null, null],
+        3 : ['red', 'red', null, null, null, null, null],
+        4 : ['yellow', 'yellow', 'red', null, null, null, null],
+        5 : ['red', 'yellow', 'yellow', 'red', null, null, null]})
+      setTimeout(() => {
+        this.checkWinner();
+        if(this.state.win){
+          console.log('minor pass');
+          this.testTie();
+        }}, "10");
+  }
+  testTie () {
+    this.setState({colHeight: [5, 5, 5, 5, 5, 5, 5],
+      0 : [null, null, null, null, null, null, null],
+      1 : [null, null, null, null, null, null, null],
+      2 : [null, null, null, null, null, null, null],
+      3 : [null, null, null, null, null, null, null],
+      4 : [null, null, null, null, null, null, null],
+      5 : [null, null, null, null, null, null, null],
+      currentPlayer: 'red',
+      win: false,
+      turns: 0,
+      tie: false})
+      this.setState({ 0 : ['yellow', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow'],
+        1 : ['yellow', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow'],
+        2 : ['red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red'],
+        3 : ['red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red'],
+        4 : ['yellow', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow'],
+        5 : ['red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red'],
+        turns: 42}
+        )
+      setTimeout(() => {
+        this.checkWinner();
+        if(this.state.tie){
+          console.log('tie pass');
+          this.reset();
+        }}, "10");
+  }
+  reset() {
+    this.setState({colHeight: [5, 5, 5, 5, 5, 5, 5],
+      0 : [null, null, null, null, null, null, null],
+      1 : [null, null, null, null, null, null, null],
+      2 : [null, null, null, null, null, null, null],
+      3 : [null, null, null, null, null, null, null],
+      4 : [null, null, null, null, null, null, null],
+      5 : [null, null, null, null, null, null, null],
+      currentPlayer: 'red',
+      win: false,
+      turns: 0,
+      tie: false})
+      $('#winner').text('');
+  }
+
   componentDidMount () {
     for(var row=0; row<6; row++){
       for(var col=0; col<7; col++){
@@ -30,6 +160,7 @@ class App extends React.Component {
         document.getElementById("board").append(cell);
       }
     }
+    this.testHorizontal();
   }
 
   setPiece (event) {
